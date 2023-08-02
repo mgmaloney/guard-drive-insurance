@@ -33,14 +33,14 @@ function RegisterForm({ user, updateUser }) {
       {/* FIRST NAME FIELD */}
       <Form.Group className="mb-3" controlId="firstName">
         <Form.Label>First Name</Form.Label>
-        <Form.Control as="text" name="firstName" required value={formData.firstName} onChange={handleChange} />
+        <Form.Control name="firstName" required value={formData.firstName} onChange={handleChange} />
         <Form.Text className="text-muted" />
       </Form.Group>
 
       {/* LAST NAME FIELD */}
       <Form.Group className="mb-3" controlId="lastName">
         <Form.Label>Last Name</Form.Label>
-        <Form.Control as="text" name="lastName" required value={formData.lastName} onChange={handleChange} />
+        <Form.Control name="lastName" required value={formData.lastName} onChange={handleChange} />
         <Form.Text className="text-muted" />
       </Form.Group>
 
@@ -61,7 +61,7 @@ function RegisterForm({ user, updateUser }) {
       {/* PHONE NUMBER FIELD */}
       <Form.Group className="mb-3" controlId="phoneNumber">
         <Form.Label>Enter your phone number</Form.Label>
-        <Form.Control type="number" name="phoneNumber" pattern="^\d{3}-\d{3}-\d{4}$" required value={formData.phoneNumber} onChange={handleChange} />
+        <Form.Control placeholder="XXX-XXX-XXXX" name="phoneNumber" pattern="^\d{3}-\d{3}-\d{4}$" required value={formData.phoneNumber} onChange={handleChange} />
         <Form.Text className="text-muted" />
       </Form.Group>
 
@@ -75,7 +75,6 @@ function RegisterForm({ user, updateUser }) {
 RegisterForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
     fbUser: PropTypes.shape({
       email: PropTypes.string.isRequired,
     }),
