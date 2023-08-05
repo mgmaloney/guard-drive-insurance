@@ -8,7 +8,6 @@ import { signOut } from '../utils/auth';
 import { deleteUser } from '../API/user';
 
 function ShowUser({ userObj }) {
-  console.warn(userObj);
   const deleteThisUser = () => {
     if (window.confirm('Delete your account?')) {
       deleteUser(userObj.id).then(() => signOut());
