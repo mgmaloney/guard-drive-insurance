@@ -8,7 +8,6 @@ import { getSingleUser } from '../API/user';
 
 function RegisterForm({ user, updateUser }) {
   const router = useRouter();
-  const { id } = router.query;
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -18,7 +17,6 @@ function RegisterForm({ user, updateUser }) {
     profileImageUrl: '',
     address: '',
     phoneNumber: '',
-    id: '',
   });
 
   useEffect(() => {
@@ -35,7 +33,7 @@ function RegisterForm({ user, updateUser }) {
         }));
       });
     }
-  }, [user, id]);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -110,13 +108,20 @@ function RegisterForm({ user, updateUser }) {
 RegisterForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    email: PropTypes.string,
     fbUser: PropTypes.shape({
       email: PropTypes.string.isRequired,
     }),
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
+};
+
+RegisterForm.defaultPropTypes = {
+  user: PropTypes.shape({
+    id: '',
+    email: '',
+  }),
 };
 
 export default RegisterForm;
