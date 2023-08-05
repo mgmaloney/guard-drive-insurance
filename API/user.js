@@ -25,7 +25,15 @@ const updateUser = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleUser = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/users/${id}`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 export {
   deleteUser,
   updateUser,
+  getSingleUser,
 };
