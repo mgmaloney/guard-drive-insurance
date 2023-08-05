@@ -19,14 +19,12 @@ function ShowUser({ userObj }) {
       <Card.Img variant="top" src={userObj.profile_image_url} />
       <Card.Body>
         <Card.Title>{userObj.first_name} {userObj.last_name}</Card.Title>
-        <Card.Text>
-          <h3>Contact information</h3>
-          <>
-            <h4>{userObj.address}</h4>
-            <h4>{userObj.phone_number}</h4>
-            <h4>{userObj.email}</h4>
-          </>
-        </Card.Text>
+        <h3>Contact information</h3>
+        <span>
+          <h4>{userObj.address}</h4>
+          <h4>{userObj.phone_number}</h4>
+          <h4>{userObj.email}</h4>
+        </span>
         <Link href="/users/edit/ViewForm" passHref>
           <Button variant="info">EDIT</Button>
         </Link>
@@ -41,7 +39,7 @@ export default ShowUser;
 
 ShowUser.propTypes = {
   userObj: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     email: PropTypes.string,
     first_name: PropTypes.string,
     last_name: PropTypes.string,
