@@ -22,6 +22,13 @@ export default function AddPolicy({ obj }) {
   const [userCoverages, setUserCoverages] = useState([]);
 
   useEffect(() => {
+    if (obj.id) {
+      setFormInput(obj);
+    }
+    console.warn(obj);
+  }, [obj]);
+
+  useEffect(() => {
     getAllCoverages().then(setCoverages);
   }, []);
 

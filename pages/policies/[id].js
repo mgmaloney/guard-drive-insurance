@@ -27,8 +27,8 @@ export default function ViewPolicy() {
         <p>Policy Vehicle: {policy.vehicle}</p>
         <p>Coverages: </p>
         <ul>
-          {policy.coverages.forEach((coverage) => (
-            <li className="coverage-li">{coverage.coverageId.type}</li>
+          {policy.coverages?.map((coverage) => (
+            <li className="coverage-li">{coverage.coverage_id.type}</li>
           ))}
         </ul>
         <Link passHref href={`/policies/edit/${policy.id}`}>
