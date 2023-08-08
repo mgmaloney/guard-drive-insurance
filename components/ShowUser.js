@@ -15,8 +15,8 @@ function ShowUser({ userObj }) {
   };
 
   return (
-    <Card style={{ width: '20rem' }}>
-      <Card.Img variant="top" src={userObj.profile_image_url} />
+    <Card className="profile-card">
+      <Card.Img className="rounded-circle mb-3 img" variant="top" src={userObj.profile_image_url} />
       <Card.Body>
         <Card.Title>{userObj.first_name} {userObj.last_name}</Card.Title>
         <h3>Contact information</h3>
