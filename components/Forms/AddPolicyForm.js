@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel, Button } from 'react-bootstrap';
 
-import { createPolicy } from '../../API/policies';
-import { createCoverage, getAllCoverages } from '../../API/coverages';
+import { createPolicy, updatePolicy } from '../../API/policies';
+import { createCoverage, getAllCoverages, updateCoverage } from '../../API/coverages';
 import { useAuth } from '../../utils/context/authContext';
 
 const initialState = {
@@ -20,40 +20,90 @@ export default function AddPolicy({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [coverages, setCoverages] = useState([]);
   const [userCoverages, setUserCoverages] = useState([]);
+  const [addRemoveCoverages, setAddRemoveCoverages] = useState([]);
+  const [submitBtnName, setSubmitBtnName] = useState('');
 
   useEffect(() => {
     if (obj.id) {
-      setFormInput(obj);
+      setFormInput({
+        company: obj.company,
+        vehicle: obj.vehicle,
+      });
     }
-    console.warn(obj);
+  }, [obj.id]);
+
+  useEffect(() => {
+    setAddRemoveCoverages(obj.coverages);
   }, [obj]);
 
   useEffect(() => {
     getAllCoverages().then(setCoverages);
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.warn('name', name, 'value', value);
-    setFormInput((prevState) => ({ ...prevState, [name]: value }));
-    console.warn('handleChange input', formInput);
-  };
+  useEffect(() => {
+    const coverageIds = [];
+    obj.coverages?.forEach((coverage) => {
+      coverageIds.push(coverage.coverage_id.id);
+    });
+    setUserCoverages(coverageIds);
+  }, [obj.coverages]);
+
+  useEffect(() => {
+    if (obj.id) {
+      setSubmitBtnName('update');
+    } else {
+      setSubmitBtnName('create');
+    }
+  }, []);
 
   const addCoverage = () => {
-    console.warn('formInput', formInput);
     const addedCoverageArr = [...userCoverages, formInput.coverage];
-    console.warn('addedCoverageArr', addedCoverageArr);
     setUserCoverages(addedCoverageArr);
-    console.warn('userCOverage', userCoverages);
+    coverages.forEach((coverage) => {
+      if (coverage.id === Number(formInput.coverage)) {
+        const coverageToAdd = {
+          coverage_id: {
+            id: coverage.id,
+            type: coverage.type,
+          },
+        };
+        setAddRemoveCoverages((prevState) => [...prevState, coverageToAdd]);
+      }
+    });
+  };
+
+  const removeCoverage = (e) => {
+    const coverageToRemove = e.target.value;
+    const userCoveragesCopy = [...userCoverages];
+    const addRemoveCoveragesCopy = [...addRemoveCoverages];
+    const coverageIndex = userCoveragesCopy.findIndex((coverage) => coverage === coverageToRemove);
+    userCoveragesCopy.splice(coverageIndex, 1);
+    addRemoveCoveragesCopy.splice(coverageIndex, 1);
+    setUserCoverages(userCoveragesCopy);
+    setAddRemoveCoverages(addRemoveCoveragesCopy);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const policyId = await createPolicy({ userId: user.id, ...formInput });
-    userCoverages.forEach(async (coverageId) => {
-      await createCoverage(policyId, { coverageId });
-    });
-    router.back();
+    console.warn('updatebtn', e.target);
+    if (submitBtnName === 'create') {
+      const policyId = await createPolicy({ userId: user.id, ...formInput });
+      userCoverages.forEach(async (coverageId) => {
+        await createCoverage(policyId, { coverageId });
+      });
+    } else if (submitBtnName === 'update') {
+      console.warn('updatebtnclick');
+      const policyId = await updatePolicy({ userId: user.id, ...formInput });
+      userCoverages.forEach(async (coverageId) => {
+        await updateCoverage(policyId, { coverageId });
+      });
+      router.back();
+    }
   };
 
   return (
@@ -70,7 +120,7 @@ export default function AddPolicy({ obj }) {
           <Form.Select aria-label="Coverage" name="coverage" className="mb-3" value={formInput.coverage} onChange={handleChange} required>
             <option>Select Coverages</option>
             {coverages.map((coverage) => (
-              <option key={coverage.id} value={coverage.id}>
+              <option key={coverage.id + 1} value={coverage.id}>
                 {coverage.type}
               </option>
             ))}
@@ -78,6 +128,17 @@ export default function AddPolicy({ obj }) {
           <Button onClick={addCoverage} variant="secondary" size="sm" active>
             +
           </Button>
+          <Form.Text>Coverages Added: </Form.Text>
+          {addRemoveCoverages?.map((coverage) => (
+            <>
+              <Form.Text className="added-coverages" key={coverage.coverage_id.id}>
+                {coverage.coverage_id?.type}
+              </Form.Text>
+              <Button key={coverage.coverage_id.id + 2} value={coverage.coverage_id?.id} type="button" className="remove-coverage-btn" onClick={removeCoverage}>
+                X
+              </Button>
+            </>
+          ))}
         </FloatingLabel>
 
         <Button type="submit">{obj.id ? 'Update' : 'Create'} Policy</Button>
@@ -88,8 +149,9 @@ export default function AddPolicy({ obj }) {
 
 AddPolicy.propTypes = {
   obj: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     userId: PropTypes.string,
+    vehicle: PropTypes.string,
     company: PropTypes.string,
     coverages: PropTypes.shape([
       PropTypes.shape({

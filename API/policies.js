@@ -27,17 +27,6 @@ const createPolicy = async (payload) => {
     return 'call failed';
   }
 };
-// new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/policies`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-
-//   })
-//     .then(resolve)
-//     .catch(reject);
-// });
 
 const getPolicies = (userId) =>
   new Promise((resolve, reject) => {

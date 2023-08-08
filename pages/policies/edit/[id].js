@@ -10,7 +10,7 @@ export default function EditPolicy() {
 
   useEffect(() => {
     getSinglePolicy(id).then(setPolicy);
-  });
+  }, []);
 
   return <AddPolicy obj={policy} />;
 }
