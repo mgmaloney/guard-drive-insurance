@@ -25,8 +25,7 @@ export default function AddPolicy({ obj }) {
     if (obj.id) {
       setFormInput(obj);
     }
-    console.warn(obj);
-  }, [obj]);
+  }, [obj.id]);
 
   useEffect(() => {
     getAllCoverages().then(setCoverages);
@@ -78,6 +77,15 @@ export default function AddPolicy({ obj }) {
           <Button onClick={addCoverage} variant="secondary" size="sm" active>
             +
           </Button>
+          <Form.Text>Coverages Added: </Form.Text>
+          {formInput.coverages?.map((coverage) => (
+            <>
+              <Form.Text>{coverage.type}</Form.Text>
+              <Button type="button" className="remove-coverage-btn">
+                X
+              </Button>
+            </>
+          ))}
         </FloatingLabel>
 
         <Button type="submit">{obj.id ? 'Update' : 'Create'} Policy</Button>

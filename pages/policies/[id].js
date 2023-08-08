@@ -14,7 +14,8 @@ export default function ViewPolicy() {
   }, [id]);
 
   const deleteViewedPolicy = async () => {
-    await deletePolicy(policy.id);
+    await deletePolicy(id);
+    router.back();
   };
 
   return (
