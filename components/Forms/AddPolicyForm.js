@@ -31,7 +31,9 @@ export default function AddPolicy({ obj }) {
   }, [obj.id]);
 
   useEffect(() => {
-    setAddRemoveCoverages(obj.coverages);
+    if (obj.id) {
+      setAddRemoveCoverages(obj.coverages);
+    }
   }, [obj]);
 
   useEffect(() => {
