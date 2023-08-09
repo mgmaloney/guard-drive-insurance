@@ -37,3 +37,17 @@ body {
 .profle-btn{
   margin-right: 15%;
 }
+
+.policy-card{
+  width: 30%;
+  margin: auto;
+}
+
+.your-policies{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.policy-btn{
+  float: right;
+}

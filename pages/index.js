@@ -28,7 +28,7 @@ function Home() {
       </div>
       <div className="your-policies">
         {userPolicies.map((policy) => (
-          <Card>
+          <Card className="policy-card">
             <Card.Header>Policy</Card.Header>
             <Card.Body>
               <Card.Title>{policy.company}</Card.Title>
@@ -42,7 +42,7 @@ function Home() {
                 </ul>
               </Card.Text>
               <Link passHref href={`/policies/${policy.id}`}>
-                <Button variant="primary">View Policy</Button>
+                <Button className="policy-btn" variant="primary">View Policy</Button>
               </Link>
             </Card.Body>
           </Card>
