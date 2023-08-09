@@ -36,7 +36,6 @@ const updateCoverage = async (policyId, payload) => {
 const getAllCoverages = async () => {
   try {
     const { data } = await axios.get(`${dbUrl}/coverages`);
-    console.warn(data);
     return Object.values(data);
   } catch (e) {
     console.warn(e);
@@ -44,6 +43,16 @@ const getAllCoverages = async () => {
   }
 };
 
+const deleteAllPolicyCoverages = async (policyId) => {
+  try {
+    const { data } = await axios.delete(`${dbUrl}/policies/${policyId}/removecoverage`);
+    return data;
+  } catch (e) {
+    console.warn(e);
+    return 'failed call';
+  }
+};
+
 export {
-  createCoverage, deleteCoverage, updateCoverage, getAllCoverages,
+  createCoverage, deleteCoverage, deleteAllPolicyCoverages, updateCoverage, getAllCoverages,
 };
