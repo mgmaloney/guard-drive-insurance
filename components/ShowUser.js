@@ -18,7 +18,7 @@ function ShowUser({ userObj }) {
     <Card className="profile-card">
       <Card.Img className="rounded-circle mb-3 img" variant="top" src={userObj.profile_image_url} />
       <Card.Body>
-        <Card.Title>{userObj.first_name} {userObj.last_name}</Card.Title>
+        <h1>{userObj.first_name} {userObj.last_name}</h1>
         <h3>Contact information</h3>
         <span>
           <h4>{userObj.address}</h4>
@@ -26,10 +26,10 @@ function ShowUser({ userObj }) {
           <h4>{userObj.email}</h4>
         </span>
         <Link href="/users/edit/ViewForm" passHref>
-          <Button variant="info">EDIT</Button>
+          <Button className="profle-btn" variant="info">EDIT</Button>
         </Link>
-        <Button type="button" variant="primary" onClick={signOut}>Log Out</Button>
-        <Button type="button" variant="danger" onClick={deleteThisUser}>Delete</Button>
+        <Button className="profle-btn" type="button" variant="primary" onClick={signOut}>Log Out</Button>
+        <Button className="profle-btn" type="button" variant="danger" onClick={deleteThisUser}>Delete</Button>
       </Card.Body>
     </Card>
   );
