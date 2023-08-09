@@ -16,7 +16,6 @@ const initialState = {
 export default function AddPolicy({ obj }) {
   const { user } = useAuth();
   const router = useRouter();
-
   const [formInput, setFormInput] = useState(initialState);
   const [coverages, setCoverages] = useState([]);
   const [userCoverages, setUserCoverages] = useState([]);
@@ -90,14 +89,12 @@ export default function AddPolicy({ obj }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.warn('updatebtn', e.target);
     if (submitBtnName === 'create') {
       const policyId = await createPolicy({ userId: user.id, ...formInput });
       userCoverages.forEach(async (coverageId) => {
         await createCoverage(policyId, { coverageId });
       });
     } else if (submitBtnName === 'update') {
-      console.warn('updatebtnclick');
       const policyId = await updatePolicy({ userId: user.id, ...formInput });
       userCoverages.forEach(async (coverageId) => {
         await updateCoverage(policyId, { coverageId });

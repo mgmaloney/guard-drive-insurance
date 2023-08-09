@@ -33,6 +33,7 @@ function Home() {
             <Card.Body>
               <Card.Title>{policy.company}</Card.Title>
               <Card.Text>
+                <p>Policy Vehicle: {policy.vehicle}</p>
                 <p>Coverages: </p>
                 <ul>
                   {policy.coverages.map((coverage) => (
