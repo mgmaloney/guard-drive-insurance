@@ -3,9 +3,8 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel, Button } from 'react-bootstrap';
-
 import { createPolicy, updatePolicy } from '../../API/policies';
-import { createCoverage, getAllCoverages, updateCoverage } from '../../API/coverages';
+import { createCoverage, deleteAllPolicyCoverages, getAllCoverages } from '../../API/coverages';
 import { useAuth } from '../../utils/context/authContext';
 
 const initialState = {
@@ -53,7 +52,7 @@ export default function AddPolicy({ obj }) {
     } else {
       setSubmitBtnName('create');
     }
-  }, []);
+  }, [obj]);
 
   const addCoverage = () => {
     const addedCoverageArr = [...userCoverages, formInput.coverage];
@@ -95,9 +94,10 @@ export default function AddPolicy({ obj }) {
         await createCoverage(policyId, { coverageId });
       });
     } else if (submitBtnName === 'update') {
-      const policyId = await updatePolicy({ userId: user.id, ...formInput });
+      await deleteAllPolicyCoverages(obj.id);
+      await updatePolicy({ userId: user.id, id: obj.id, ...formInput });
       userCoverages.forEach(async (coverageId) => {
-        await updateCoverage(policyId, { coverageId });
+        await createCoverage(obj.id, { coverageId });
       });
       router.back();
     }
@@ -114,7 +114,7 @@ export default function AddPolicy({ obj }) {
           <Form.Control type="text" placeholder="Vehicle" name="vehicle" value={formInput.vehicle} onChange={handleChange} required />
         </FloatingLabel>
         <FloatingLabel controlId="floatingInput3" label="Coverages">
-          <Form.Select aria-label="Coverage" name="coverage" className="mb-3" value={formInput.coverage} onChange={handleChange} required>
+          <Form.Select aria-label="Coverage" name="coverage" className="mb-3" value={formInput.coverage} onChange={handleChange}>
             <option>Select Coverages</option>
             {coverages.map((coverage) => (
               <option key={coverage.id + 1} value={coverage.id}>
