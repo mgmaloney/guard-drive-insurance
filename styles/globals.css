@@ -4,8 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -21,7 +20,7 @@ body {
   background-color: #88effd;
 }
 
-.profile-card{
+.profile-card {
   margin: 2% auto auto auto;
   width: 50%;
   display: flex;
@@ -34,20 +33,79 @@ body {
   margin: 6% 1% auto 1%;
 }
 
-.profle-btn{
+.profle-btn {
   margin-right: 15%;
 }
 
-.policy-card{
+.policy-card {
   width: 30%;
   margin: auto;
 }
 
-.your-policies{
+.your-policies {
   display: flex;
   flex-flow: row wrap;
 }
 
-.policy-btn{
+.policy-btn {
   float: right;
+}
+
+.remove-coverage-btn {
+  font-size: 0.7rem;
+  margin: 0rem 0.25rem;
+  padding: 0px 2px;
+}
+
+.coverages-div {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.coverage-header {
+  font-weight: bold;
+}
+
+.added-coverages {
+  font-size: 1.25rem;
+  margin: 0.5rem 0rem 0.5rem 0.5rem;
+}
+
+.coverage-selecting {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.add-coverage-btn {
+  margin-top: 0px;
+  margin-left: 0.75rem;
+  padding-top: 0px;
+  max-height: 2rem;
+}
+
+.coverage-select {
+  margin-top: 17px;
+  height: 3rem;
+}
+
+.create-update-btn {
+  margin-top: 1rem;
+}
+
+.create-policy-header {
+  margin-bottom: 0rem;
+  color: black;
+}
+
+.text-input {
+  margin-top: 2rem;
+}
+
+.car {
+  max-width: 4rem;
+  background: transparent;
+  margin: 0rem 1rem 0rem 1rem;
 }
