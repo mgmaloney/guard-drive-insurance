@@ -92,11 +92,20 @@ body {
 }
 
 .create-update-btn {
+  margin-top: 1rem;
+}
+
+.create-policy-header {
+  margin-bottom: 0rem;
+  color: black;
+}
+
+.text-input {
   margin-top: 2rem;
 }
 
-h2 {
-  margin-bottom: 1.5rem;
+.car {
+  max-width: 4rem;
+  background: transparent;
+  margin: 0rem 1rem 0rem 1rem;
 }
-
-

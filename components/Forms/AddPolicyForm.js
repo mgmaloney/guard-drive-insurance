@@ -108,12 +108,12 @@ export default function AddPolicy({ obj }) {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Policy</h2>
+        <h2 className="text-black mt-5 create-policy-header">{obj.id ? 'Update' : 'Create'} Policy</h2>
         <FloatingLabel controlId="floatingInput1" label="Company" className="mb-3">
-          <Form.Control type="text" placeholder="Company" name="company" value={formInput.company} onChange={handleChange} required />
+          <Form.Control type="text" placeholder="Company" className="text-input" name="company" value={formInput.company} onChange={handleChange} required />
         </FloatingLabel>
         <FloatingLabel controlId="floatingInput2" label="Vehicle" className="mb-3">
-          <Form.Control type="text" placeholder="Vehicle" name="vehicle" value={formInput.vehicle} onChange={handleChange} required />
+          <Form.Control type="text" placeholder="Vehicle" className="text-input" name="vehicle" value={formInput.vehicle} onChange={handleChange} required />
         </FloatingLabel>
 
         <div className="coverage-selecting">
@@ -145,7 +145,9 @@ export default function AddPolicy({ obj }) {
           ))}
         </div>
 
-        <Button className="create-update-btn" type="submit">{obj.id ? 'Update' : 'Create'} Policy</Button>
+        <Button className="create-update-btn" type="submit">
+          {obj.id ? 'Update' : 'Create'} Policy
+        </Button>
       </Form>
     </>
   );
