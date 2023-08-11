@@ -49,40 +49,42 @@ export default function NavBar() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Link passHref href="/">
-          <Navbar.Brand>Guard Drive Insurance</Navbar.Brand>
-        </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
-            <Link passHref href="/">
-              <Nav.Link onMouseEnter={setterHome} onMouseLeave={setterHome}>
-                Home
-                <span>{homeImage ? <img className="car" src={imageSrc} /> : ''}</span>
-              </Nav.Link>
-            </Link>
-            <Link passHref href="/profile">
-              <Nav.Link onMouseEnter={setterProfile} onMouseLeave={setterProfile}>
-                Profile
-                <span>{profileImage ? <img className="car" src={imageSrc} /> : ''}</span>
-              </Nav.Link>
-            </Link>
-            <Link passHref href="/policies/new">
-              <Nav.Link onMouseEnter={setterPolicy} onMouseLeave={setterPolicy}>
-                Add Policy
-                <span>{addPolicyImage ? <img className="car" src={imageSrc} /> : ''}</span>
-              </Nav.Link>
-            </Link>
-            <Button variant="danger" onMouseEnter={setterSignOut} onMouseLeave={setterSignOut} onClick={signOut}>
-              Sign Out
-            </Button>
-            {signOutImage ? <img className="car" src={imageSrc} /> : ''}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="nav-div">
+      <Navbar className="custom-nav" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Link passHref href="/">
+            <Navbar.Brand>Guard Drive Insurance</Navbar.Brand>
+          </Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
+              <Link passHref href="/">
+                <Nav.Link onMouseEnter={setterHome} onMouseLeave={setterHome}>
+                  Home
+                  <span>{homeImage ? <img className="car" src={imageSrc} /> : ''}</span>
+                </Nav.Link>
+              </Link>
+              <Link passHref href="/profile">
+                <Nav.Link onMouseEnter={setterProfile} onMouseLeave={setterProfile}>
+                  Profile
+                  <span>{profileImage ? <img className="car" src={imageSrc} /> : ''}</span>
+                </Nav.Link>
+              </Link>
+              <Link passHref href="/policies/new">
+                <Nav.Link onMouseEnter={setterPolicy} onMouseLeave={setterPolicy}>
+                  Add Policy
+                  <span>{addPolicyImage ? <img className="car" src={imageSrc} /> : ''}</span>
+                </Nav.Link>
+              </Link>
+              <Button variant="danger" onMouseEnter={setterSignOut} onMouseLeave={setterSignOut} onClick={signOut}>
+                Sign Out
+              </Button>
+              {signOutImage ? <img className="car" src={imageSrc} /> : ''}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 }

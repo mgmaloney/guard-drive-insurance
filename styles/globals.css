@@ -5,6 +5,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-image: linear-gradient(to right bottom, #00c1ff, #00a5ff, #0084ff, #005cff, #0003ff);
+  height: 100%;
 }
 
 a {
@@ -108,4 +110,22 @@ body {
   max-width: 4rem;
   background: transparent;
   margin: 0rem 1rem 0rem 1rem;
+}
+
+.nav-div {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-nav {
+  padding: 1rem;
+  width: 75%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-image: linear-gradient(to right bottom, #3f00ff, #3409f1, #290fe2, #1e12d4, #1214c6);
 }
