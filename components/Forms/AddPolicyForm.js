@@ -95,6 +95,7 @@ export default function AddPolicy({ obj }) {
       userCoverages.forEach(async (coverageId) => {
         await createCoverage(policyId, { coverageId });
       });
+      router.push('/');
     } else if (submitBtnName === 'update') {
       await deleteAllPolicyCoverages(obj.id);
       await updatePolicy({ userId: user.id, id: obj.id, ...formInput });
